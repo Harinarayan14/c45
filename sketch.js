@@ -22,7 +22,7 @@ function preload(){
 }
 
 function setup(){
-  canvas = createCanvas(displayWidth - 20, displayHeight-30);
+  canvas = createCanvas(displayWidth, displayHeight*15);
   database = firebase.database();
   game = new Game();
   game.getState();
@@ -31,7 +31,7 @@ function setup(){
 
 
 function draw(){
-  if(playerCount === 4){
+  if(playerCount === 2){
     game.update(1);
   }
   if(gameState === 1){

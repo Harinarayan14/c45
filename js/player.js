@@ -5,6 +5,7 @@ class Player{
         this.distance =0;
         this.rank =0;
         this.health =200;
+        this.xdis = 0;
 
 }
 getCount(){
@@ -23,7 +24,8 @@ update(){
    database.ref(ind).update({
        name : this.name,
        distance : this.distance,
-       health : this.health
+       health : this.health,
+       xdis:this.xdis
    })
 }
 

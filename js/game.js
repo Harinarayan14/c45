@@ -47,8 +47,8 @@ class Game {
       player.getCarsAtEnd();
       
       if(allPlayers !== undefined){
-        background(rgb(198,135,103));
-        
+        //background(rgb(198,135,103));
+        image(track,0,-displayHeight*15,displayWidth,displayHeight*16);
         //var display_position = 100;
         
         //index of the array
@@ -63,26 +63,37 @@ class Game {
           index = index + 1 ;
   
           //position the cars a little away from each other in x direction
-          x = x + 200;
+          x = x +200;
+          allPlayers[plr].xdis = x ;
+         // player.update();                  
           //use data form the database to display the cars in y direction
           y = displayHeight - allPlayers[plr].distance;
-          cars[index-1].x = x;
+          cars[index-1].x = allPlayers[plr].xdis;
           cars[index-1].y = y;
          // console.log(index, player.index)
-         console.log(cars[index-1]);
-  
-         
+         //console.log(cars[index-1]);
+          console.log(allPlayers[plr].xdis);
           if (index === player.index){
             stroke(10);
             fill("red");
-            ellipse(x,y,60,60);
+            ellipse(x,y,100,100);
             cars[index - 1].shapeColor = "red";
             camera.position.x = displayWidth/2;
             camera.position.y = cars[index-1].y;
+            if(allPlayers[plr].xdis<50 ){
+             allPlayers[plr].health--;
+             player.update();
+            console.log(allPlayers[plr].health);
+            }
+            if(allPlayers[plr].xdis>1250){
+             allPlayers[plr].health--;
+             player.update();
+            }
+
           }
          
-          //textSize(15);
-          //text(allPlayers[plr].name + ": " + allPlayers[plr].distance, 120,display_position)
+          textSize(15);
+          text(allPlayers[plr].health, cars[index-1].x,cars[index-1].y)
         }
   
       }
@@ -91,10 +102,18 @@ class Game {
         player.distance +=10
         player.update();
      }
-      if(keyIsDown(DOWN_ARROW) && player.index !== null){
+     if(keyIsDown(LEFT_ARROW) && player.index !== null){
+       player.xdis -=10
+       player.update();
+    }
+    if(keyIsDown(RIGHT_ARROW) && player.index !== null){
+      player.xdis +=10
+      player.update();
+   }
+      /*if(keyIsDown(DOWN_ARROW) && player.index !== null){
         player.distance -=10
         player.update();
-      }
+      }*/
   
       if(player.distance > 38600){
         gameState = 2;
