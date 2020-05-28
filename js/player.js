@@ -5,7 +5,7 @@ class Player{
         this.distance =0;
         this.rank =0;
         this.health =200;
-        this.xdis = 0;
+        this.xdis =displayWidth/2 - 300;
 
 }
 getCount(){

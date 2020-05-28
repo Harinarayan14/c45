@@ -43,43 +43,50 @@ class Game {
     play(){
       form.hide1();
       
+      image(track,0,-displayHeight*135,displayWidth,displayHeight*136);
       Player.getPlayerInfo();
       player.getCarsAtEnd();
-      
+      var index = 0;
       if(allPlayers !== undefined){
         //background(rgb(198,135,103));
-        image(track,0,-displayHeight*15,displayWidth,displayHeight*16);
         //var display_position = 100;
         
         //index of the array
-        var index = 0;
   
         //x and y position of the cars
-        var x = 175 ;
         var y;
   
         for(var plr in allPlayers){
           //add 1 to the index for every loop
           index = index + 1 ;
   
-          //position the cars a little away from each other in x direction
-          x = x +200;
-          allPlayers[plr].xdis = x ;
-         // player.update();                  
+          //position the cars a little away from each other in x direction   
           //use data form the database to display the cars in y direction
           y = displayHeight - allPlayers[plr].distance;
           cars[index-1].x = allPlayers[plr].xdis;
           cars[index-1].y = y;
          // console.log(index, player.index)
          //console.log(cars[index-1]);
-          console.log(allPlayers[plr].xdis);
+         // console.log(allPlayers[plr].xdis);
           if (index === player.index){
             stroke(10);
             fill("red");
-            ellipse(x,y,100,100);
+            ellipse(allPlayers[plr].xdis,y,150,150);
             cars[index - 1].shapeColor = "red";
             camera.position.x = displayWidth/2;
             camera.position.y = cars[index-1].y;
+            textSize(25);
+            text("Health : "+ player.health,displayWidth/2,cars[index-1].y -250);
+            textSize(20);
+            text("Distance Covered : "+ player.distance/1000 +"Km",displayWidth/2,cars[index-1].y -225);
+            var dis = 103500 - player.distance;
+            textSize(20);
+            text("Distance Left : "+ dis/1000 +"Km",displayWidth/2,cars[index-1].y -200);
+            
+            /*fill(255);
+            stroke(255);
+            textSize(25);
+            text(player.health,cars[index-1].x,cars[index-1].y + 100);
             if(allPlayers[plr].xdis<50 ){
              allPlayers[plr].health--;
              player.update();
@@ -88,18 +95,16 @@ class Game {
             if(allPlayers[plr].xdis>1250){
              allPlayers[plr].health--;
              player.update();
-            }
-
+            }*/
+  
           }
          
-          textSize(15);
-          text(allPlayers[plr].health, cars[index-1].x,cars[index-1].y)
         }
   
       }
   
       if(keyIsDown(UP_ARROW) && player.index !== null){
-        player.distance +=10
+        player.distance +=25;
         player.update();
      }
      if(keyIsDown(LEFT_ARROW) && player.index !== null){
@@ -115,19 +120,27 @@ class Game {
         player.update();
       }*/
   
-      if(player.distance > 38600){
+      if( player.xdis<125 || player.xdis>1250){
+        player.health-=10;
+        player.xdis = displayWidth/2 ;
+        player.update();
+      }
+      drawSprites();
+      if(player.distance > 103500){
         gameState = 2;
         player.rank += 1;
         Player.updateEnd(player.rank);
         textSize(30);
-        text("GameOver!      Rank :" +player.rank,displayWidth/2,-displayHeight*4 - 100 );
+        text("GameOver!      Rank :" +player.rank,displayWidth/2-50,-displayHeight*134 +10 );
       }
      
-      drawSprites();
-    }
-  
-    end(){
-      console.log("Game Ended");
-    }
+
+
   }
+  
+  
+  end(){
+    console.log("Game Ended");
+  }
+}
   

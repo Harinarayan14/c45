@@ -14,7 +14,7 @@ var cars=[], car1, car2, car3, car4;
 var track, car1_img, car2_img, car3_img, car4_img;
 
 function preload(){
-  track = loadImage("../images/track.png");
+  track = loadImage("../images/track2.jpg");
   car1_img = loadImage("../images/car1.png");
   car2_img = loadImage("../images/car2.png");
   car3_img = loadImage("../images/car3.png");
@@ -22,7 +22,7 @@ function preload(){
 }
 
 function setup(){
-  canvas = createCanvas(displayWidth, displayHeight*15);
+  canvas = createCanvas(displayWidth, displayHeight);
   database = firebase.database();
   game = new Game();
   game.getState();
@@ -36,9 +36,12 @@ function draw(){
   }
   if(gameState === 1){
     clear();
+    obstacle = new Obstacles();
     game.play();
   }
   if(gameState === 2){
     game.end();
   }
+  
 }
+
