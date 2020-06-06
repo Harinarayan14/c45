@@ -48,6 +48,9 @@ class Game {
       player.getCarsAtEnd();
       var index = 0;
       if(allPlayers !== undefined){
+       // var obstacle = new Obstacles();
+        //var powerup = new Powerups();
+        //obstacle.check();
         //background(rgb(198,135,103));
         //var display_position = 100;
         
@@ -82,7 +85,13 @@ class Game {
             var dis = 103500 - player.distance;
             textSize(20);
             text("Distance Left : "+ dis/1000 +"Km",displayWidth/2,cars[index-1].y -200);
-            
+            console.log(player.health);
+      if(cars[index-1].isTouching(o1)){
+        o1.destroy();
+        player.health-=20;
+        player.update();
+        //console.log("hello");
+      }
             /*fill(255);
             stroke(255);
             textSize(25);
@@ -102,7 +111,6 @@ class Game {
         }
   
       }
-  
       if(keyIsDown(UP_ARROW) && player.index !== null){
         player.distance +=25;
         player.update();
@@ -114,6 +122,11 @@ class Game {
     if(keyIsDown(RIGHT_ARROW) && player.index !== null){
       player.xdis +=10
       player.update();
+   }
+   if(player.health<=0){
+     gameState=2;
+     textSize(50);
+     text("You Lose !!!",200,200);
    }
       /*if(keyIsDown(DOWN_ARROW) && player.index !== null){
         player.distance -=10
