@@ -39,7 +39,7 @@ hide1(){
      this.rule1.position(10,displayHeight/4 + 75);
      this.rule2.html("Use Arrow Keys to Move");
      this.rule2.position(10,displayHeight/4 + 50);
-     this.rule3.html("Use PowerUps to increase speed.");
+     this.rule3.html("Use PowerUps to increase health.");
      this.rule3.position(10,displayHeight/4 + 100);
      this.rule4.html("You lose if your health reaches 0.");
      this.rule4.position(10,displayHeight/4 + 125);

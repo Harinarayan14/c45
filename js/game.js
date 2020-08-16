@@ -86,12 +86,12 @@ class Game {
             textSize(20);
             text("Distance Left : "+ dis/1000 +"Km",displayWidth/2,cars[index-1].y -200);
             console.log(player.health);
-      if(cars[index-1].isTouching(o1)){
+      /*if(cars[index-1].isTouching(k)){
         o1.destroy();
         player.health-=20;
         player.update();
         //console.log("hello");
-      }
+      }*/
             /*fill(255);
             stroke(255);
             textSize(25);
